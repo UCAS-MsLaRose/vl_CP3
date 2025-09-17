@@ -17,19 +17,32 @@ struct Movie {
     Date releaseDate;
     bool isPopular = true; 
 
-    bool == (const Movie& movie){
-            if (title == movie.title &&
-                releaseDate.year == movie.releaseDate.year &&
-                releaseDate.month == movie.releaseDate.month &&
-                releaseDate.day == movie.releaseDate.day &&
-                isPopular == movie.isPopular
-            ){
-        return true;
-    }else{
-        return false;
-    }
-    }
+
+    
 };
+
+bool operator==(const Movie& first, const Movie& second){
+            return (first.title == second.title &&
+                first.releaseDate.year == second.releaseDate.year &&
+                first.releaseDate.month == second.releaseDate.month &&
+                first.releaseDate.day == second.releaseDate.day &&
+                first.isPopular == second.isPopular
+            );
+}
+
+ostream& operator<<(ostream& stream, Movie& movie){
+    stream << movie.title;
+    return stream;
+}
+
+//ostream& operator<<(ostream& stream, Customer& customer){
+//    stream << customer.name;
+//    return stream;
+//}
+
+void showMovie(Movie* movie){
+    cout << movie -> title << endl;
+}
 
 // customer structor with id, name, email
 
@@ -43,6 +56,7 @@ int main(){
 
     Movie movie1 = {"Terminator", {1984, 6, 1}};
     Movie movie2 = {"Terminator 2", 1987};
+    showMovie(&movie1);
 
     //auto [title, releaseYear, isPopular] {movie};
 
@@ -52,7 +66,11 @@ int main(){
         cout << "Movie Year: " << releaseDate.year << endl;
         cout << "Movie Popular: " << isPopular << endl;
     }
-    cout << movie1 == movie2 << endl;
+    if(movie1 == movie2)
+        cout << movie1 << " is Equal" << endl;
+    else{
+        cout << movie1 << " is not " << movie2 << endl;
+    }
 
 
     return 0;
