@@ -8,7 +8,7 @@ enum Menu{
     Battle,
     Heal
 };
-enum Menu{
+enum Menu2{
     List = 1,
     Add,
     Update
@@ -28,7 +28,13 @@ int main(){
     "2: Add invoices" << endl <<
     "3: Update invoices" << endl <<
     "Select: ";
-    cin >> input;
+
+    while (!(cin >> input)){
+        cout << "Please enter a number option" << endl;
+        cin.clear();
+        cin.ignore();
+    }
+    
 
 
     if (input == static_cast<int>(Operation::List)){
