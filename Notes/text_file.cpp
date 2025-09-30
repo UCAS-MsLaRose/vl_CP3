@@ -68,7 +68,7 @@ int main(){
    string str;
    vector<Movie> movies;
    if(ifile.is_open()){
-    while(!ifile.eof()){
+    while(!ifile.eof()){ //My notes didn't include the title line, that is what is causing the stoi error. Tal abut how to skip over the first line
         getline(ifile, str, ',');
         if(str.empty()) continue;
         Movie movie;
