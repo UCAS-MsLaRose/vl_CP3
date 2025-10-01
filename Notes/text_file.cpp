@@ -58,33 +58,35 @@ int main(){
     file.open("data.csv");
     if(file.is_open()){
         file << "id, title, year\n"
-        << "1, Terminator 1, 1984\n"
-        << "2, Terminator 1, 1991\n";
+        << "1,Terminator 1,1984\n"
+        << "2,Terminator 2,1991\n";
         file.close();
    }
 
     ifstream ifile;
    ifile.open("data.csv");
-   string str;
+   string line;
    vector<Movie> movies;
    if(ifile.is_open()){
-    while(!ifile.eof()){ //My notes didn't include the title line, that is what is causing the stoi error. Tal abut how to skip over the first line
-        getline(ifile, str, ',');
-        if(str.empty()) continue;
+    getline(ifile,line);
+    while(getline(ifile,line)){ //My notes didn't include the title line, that is what is causing the stoi error. Tal abut how to skip over the first line
+        istringstream iss(line);
+        string item;
+
         Movie movie;
-        movie.id = stoi(str);
-
-        getline(ifile, str, ',');
-        movie.title = str;
-
-        getline(ifile, str, ',');
-        movie.year = stoi(str);
+        getline(iss, item, ',');
+        movie.id = stoi(item);
+        getline(iss, item, ',');
+        movie.title = item;
+        getline(iss, item, ',');
+        movie.year = stoi(item);
 
         movies.push_back(movie);
+
     }
     ifile.close();
     for(Movie i: movies){
-        cout << i.title;
+        cout << i.title << endl;
     }
 
 }
